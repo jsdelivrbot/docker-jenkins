@@ -38,8 +38,20 @@ dir = new File("/credentials/plain")
 dir.eachFileRecurse(FileType.FILES) { file ->
   println "Adding plain credential from file ${file.path}..."
 
-  def secret = new File(file.path).text.trim()
+  def secret = file.text.trim()
   def credentials = new StringCredentialsImpl(CredentialsScope.GLOBAL, file.name, '', new Secret(secret))
+
+  store.addCredentials(domain, credentials)
+}
+
+dir = new File("/credentials/user-password")
+
+dir.eachFileRecurse(FileType.FILES) { file ->
+  println "Adding user-password credential from file ${file.path}..."
+
+  def user = file.readLines().get(0).trim()
+  def password = file.readLines().get(1).trim()
+  def credentials = new UsernamePasswordCredentialsImpl(CredentialsScope.GLOBAL, file.name, '', user, password)
 
   store.addCredentials(domain, credentials)
 }
