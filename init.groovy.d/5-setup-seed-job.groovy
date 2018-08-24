@@ -70,10 +70,17 @@ if (!Jenkins.instance.getItem(jobName)) {
   def xmlStream = new ByteArrayInputStream(configXml.getBytes())
 
   try {
+    println "Creating seed job..."
     def seedJob = Jenkins.instance.createProjectFromXML(jobName, xmlStream)
-    seedJob.scheduleBuild(0, null)
+    println seedJob
   } catch (ex) {
     println "ERROR: ${ex}"
     println configXml.stripIndent()
   }
 }
+
+println "Scheduling seed job..."
+
+def job = Jenkins.instance.getItem(jobName)
+
+job.scheduleBuild(0, null)
