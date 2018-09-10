@@ -19,7 +19,7 @@ if(idpMetadataUrl != '') {
     "http://schemas.xmlsoap.org/claims/Group",
     86400,
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
-    "",
+    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress",
     "",
   null,
     new SamlEncryptionData(idpKeystoreFile, Secret.fromString(idpKeystorePassword), Secret.fromString(idpKeystorePassword), idpKeystoreAlias, false),
