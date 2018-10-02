@@ -1,5 +1,6 @@
 def gitRepoUrl = System.getenv("JENKINS_SEED_GIT_REPO_URL")
 def gitCredentialsId = System.getenv("JENKINS_SEED_GIT_CREDENTIALS_ID")
+def scriptsTarget = System.getenv("JENKINS_SEED_SCRIPTS_TARGET") ?: 'main.groovy'
 
 import jenkins.model.*
 
@@ -47,7 +48,7 @@ def configXml = """\
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <javaposse.jobdsl.plugin.ExecuteDslScripts plugin="job-dsl@1.68">
-      <targets>main.groovy</targets>
+      <targets>$scriptsTarget</targets>
       <usingScriptText>false</usingScriptText>
       <sandbox>false</sandbox>
       <ignoreExisting>false</ignoreExisting>
