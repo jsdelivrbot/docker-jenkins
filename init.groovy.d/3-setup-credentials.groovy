@@ -25,7 +25,7 @@ dir.eachFileRecurse(FileType.FILES) { file ->
     CredentialsScope.GLOBAL,
     file.name,
     "git",
-    new BasicSSHUserPrivateKey.FileOnMasterPrivateKeySource(file.path),
+    new BasicSSHUserPrivateKey.DirectEntryPrivateKeySource(file.readLines().join("\n")),
     "",
     ""
   )
