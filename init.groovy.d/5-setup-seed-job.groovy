@@ -1,6 +1,7 @@
 def gitRepoUrl = System.getenv("JENKINS_SEED_GIT_REPO_URL")
 def gitCredentialsId = System.getenv("JENKINS_SEED_GIT_CREDENTIALS_ID")
 def scriptsTarget = System.getenv("JENKINS_SEED_SCRIPTS_TARGET") ?: 'main.groovy'
+def additionalClasspath = System.getenv("JENKINS_SEED_ADDITIONAL_CLASSPATH") ?: ''
 
 import jenkins.model.*
 
@@ -59,6 +60,7 @@ def configXml = """\
       <removedViewAction>DELETE</removedViewAction>
       <removedConfigFilesAction>IGNORE</removedConfigFilesAction>
       <lookupStrategy>JENKINS_ROOT</lookupStrategy>
+      <additionalClasspath>$additionalClasspath</additionalClasspath>
     </javaposse.jobdsl.plugin.ExecuteDslScripts>
   </builders>
   <publishers/>
